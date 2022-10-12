@@ -9,24 +9,11 @@ export const useMapTools = function () {
   });
 
   // only fetch map data once and create a tooltip
+  var jsonData = require('./us_states_geo.json');
   useEffect(() => {
-    d3.json("https://xihai01.github.io/friendly-journey/map_data.geojson")
-      .then((data) => {
-        setMapData((prevState) => {
-          return { ...prevState, data: data, loading: false };
-        });
-      })
-      .catch((err) => {
-        console.log("error occurred with loading map", err);
-      });
-
-    /// tooltip creation
-    d3.select("body")
-      .append("div")
-      .attr("id", "tooltip")
-      .attr("style", "position: absolute; opacity: 0");
-    ///
+    setMapData((prevState) => {
+      return { ...prevState, data: jsonData, loading: false };
+    });
   }, []);
-
   return { mapData };
 };
