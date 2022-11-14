@@ -9,7 +9,7 @@ export const useMapTools = function () {
   });
 
   // only fetch map data once and create a tooltip
-  var jsonData = require('./us_states_geo.json');
+  var jsonData = require('./custom.geo.json');
   useEffect(() => {
     setMapData((prevState) => {
       return { ...prevState, data: jsonData, loading: false };

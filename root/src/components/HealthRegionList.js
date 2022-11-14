@@ -15,7 +15,8 @@ export default function HealthRegionList(props) {
     const path = d3.geoPath().projection(setMapProjection(mapData.data));
     // for each geoJSON coordinate, compute and pass in the equivalent svg path
     const healthRegions = mapData.data.features.map((data) => {
-      const region_name = data.properties["NAME"];
+      const region_name = data.properties["NAME"] ? data.properties["NAME"] : data.properties["name"];
+      const geo_id = data.properties["ISO2"] ? data.properties["ISO2"] : data.properties["code_a2"];
       return (
         <HealthRegion
           key={data.properties.GEO_ID}
@@ -27,7 +28,6 @@ export default function HealthRegionList(props) {
 
     return (
       <>
-        <h1>Fuels & Infrastructure: Alternative Fueling Stations in the United States</h1>
         <svg className="map-canvas">
           <g>{healthRegions}</g>
         </svg>

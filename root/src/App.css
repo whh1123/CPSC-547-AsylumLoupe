@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 20px 20px;
 }
 
 .App-logo {
@@ -40,5 +41,47 @@
 .App h1 {
   font-size: 2em;
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+}
+
+.chartsContainer {
+  height: 360px;
+  width: 940px;
+  border: none;
+  border-style: ridge;
+  border-color: #fff;
+  color: #fff;
+  background-color: "#D37506";
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  margin: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.insightsContainer {
+  height: 360px;
+  width: 360px;
+  border: none;
+  border-style: ridge;
+  border-color: #fff;
+  color: #fff;
+  background-color: "#D37506";
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  margin: 20px;
+  display: inline-block;
+}
+
+.buttonsContainer {
+  height: 360px;
+  width: 180px;
+  margin: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.buttonStyle {
+  height: 100px;
+  width: 140px;
+  margin: 20px;
+  display: block;
 }
