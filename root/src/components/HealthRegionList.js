@@ -19,7 +19,7 @@ export default function HealthRegionList(props) {
       const geo_id = data.properties["ISO2"] ? data.properties["ISO2"] : data.properties["code_a2"];
       return (
         <HealthRegion
-          key={data.properties.GEO_ID}
+          key={geo_id}
           path={path(data)}
           tooltipData={region_name}
         />
