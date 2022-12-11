@@ -7,8 +7,9 @@ import { useState } from "react";
 import { Tooltip } from 'antd';
 
 var lowerPop = 0;
-var upperPop = 2587380;
+var upperPop = 2587380; // app
 
+// var upperPop = 38395; // res
 
 const geoUrl = require('../hooks/global_geo.json');
 var constructFill = ((f, destination, origin, countryName) => {
@@ -32,7 +33,8 @@ var constructFill = ((f, destination, origin, countryName) => {
     // trueColor = upperPop - f;
     // to ensure when deselect everything, the upper and lower range go back to the default value.
     lowerPop = 0;
-    upperPop = 2587380;
+    upperPop = 2587380; // app
+    // upperPop = 38395; // res
     trueColor = upperPop - f;
   } 
   return trueColor;
@@ -104,16 +106,12 @@ export default function MapChart(props) {
       {countryData.length > 0 && (
          <Geographies geography={geoUrl}>
          {({ geographies }) => {
-            var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            
+            // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+            var d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+           
             const currColor = scaleLinear()
             .domain([0, upperPop, upperPop * 2])
             .range(["#310354", "#f3eeeb", "#9c2a00"])
-            // .range(["#2d004b", "#f3eeeb", "#7f3b08"])
-
-            // .range(["#310354", "#a198c5", "f2eeec", "#f3eeeb", "#fbe7cc", "#e7922e", "#7f3b08"]) // 最接近理想色差，但是French崩了，不能获取origin
-            // .range(["#310354", "#593388", "#a198c5", "#c4c1de", "#e0e1ed", "f2eeec", "#f3eeeb", "#fbe7cc", "#fcc682", "#e7922e", "#b35b09", "#7f3b08"])
-            // .range(["#2d004b", "#51287f", "#7d6aa9", "#ada6ce", "#d5d5e8", "#f3eeeb", "#fce0b9", "#f9b868", "#df8621", "#b35b09", "#7f3b08"])
 
             if (destination) {
               d = d.filter((s) => s.geo === destination)
@@ -145,7 +143,7 @@ export default function MapChart(props) {
                 hover: { outline: "none" },
                 pressed: { outline: "none" },
               }}
-              fill={f === 0 ? "#000000" : currColor(constructFill(f, destination, origin, geo.properties['iso_a2_eh']))}
+              fill={(f === 0 && (geo.properties['iso_a2_eh'] !== destination) && (geo.properties['iso_a2_eh'] !== origin)) ? "#d3d3d3" : currColor(constructFill(f, destination, origin, geo.properties['iso_a2_eh']))}
               onClick={handleClick(geo.properties, f)}
               />
              </Tooltip>
