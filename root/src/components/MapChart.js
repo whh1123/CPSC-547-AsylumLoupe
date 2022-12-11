@@ -44,10 +44,10 @@ export default function MapChart(props) {
   const [origin, setOrigin] = useState("")
 
 
-  const handleClick = properties => () => {
-    console.log("Clicked!")
+  const handleClick = (properties, f) => () => {
     // var cn = properties.NAME ? properties.NAME : properties.name;
     // console.log("onClickCountry: " + cn);
+    if (f === 0 && (!destination || !origin)) { return; }
 
     var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
     // getOrigin(origin);
@@ -61,7 +61,6 @@ export default function MapChart(props) {
       if (origin) {
         // getDestination(destination);
         // console.log("inside MapCharts destination2:" + getDestination(destination));
-        console.log("yes dest, yes origin")
         value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
         setDestination("");
         setOrigin("");
@@ -70,7 +69,6 @@ export default function MapChart(props) {
         // console.log("inside MapCharts origin:" + origin);
         // console.log("inside MapCharts destination1:" + destination);
       } else {
-        console.log("yes dest, no origin")
         setOrigin(properties['iso_a2_eh'])
         getOrigin(properties['iso_a2_eh']);
         // getDestination(destination);
@@ -78,7 +76,6 @@ export default function MapChart(props) {
         // console.log("inside MapCharts destination2:" + destination);
       }
     } else {
-      console.log("No dest, no origin.")
       getDestination(destination);
       setDestination(properties['iso_a2_eh'])
       value = value.filter((s) => s.geo === properties['iso_a2_eh'])
@@ -111,7 +108,7 @@ export default function MapChart(props) {
             
             const currColor = scaleLinear()
             .domain([0, upperPop, upperPop * 2])
-            .range(["#310354", "#f3eeeb", "#7f3b08"])
+            .range(["#310354", "#f3eeeb", "#9c2a00"])
             // .range(["#2d004b", "#f3eeeb", "#7f3b08"])
 
             // .range(["#310354", "#a198c5", "f2eeec", "#f3eeeb", "#fbe7cc", "#e7922e", "#7f3b08"]) // 最接近理想色差，但是French崩了，不能获取origin
@@ -148,8 +145,8 @@ export default function MapChart(props) {
                 hover: { outline: "none" },
                 pressed: { outline: "none" },
               }}
-              fill={currColor(constructFill(f, destination, origin, geo.properties['iso_a2_eh']))}
-              onClick={handleClick(geo.properties)}
+              fill={f === 0 ? "#000000" : currColor(constructFill(f, destination, origin, geo.properties['iso_a2_eh']))}
+              onClick={handleClick(geo.properties, f)}
               />
              </Tooltip>
              
