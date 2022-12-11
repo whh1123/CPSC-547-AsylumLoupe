@@ -8,26 +8,30 @@ function App() {
   const [selectedView, setSelectedView] = useState("")
   const [appDestination, setAppDestination] = useState("")
   const [appOrigin, setAppOrigin] = useState("")
+
   var getDestination = (currDestination) => {
-    console.log("get destination in app.js: " + currDestination);
     setAppDestination(currDestination);
+    console.log("get destination in app.js: " + currDestination);
   };
+
   var getOrigin = (currOrigin) => {
     setAppOrigin(currOrigin);
+    console.log("get origin in app.js: " + currOrigin);
   };
   
   
   return (
     <div className="App">
       <h1>AsylumLoupe: EU Asylum Demographics and Movement</h1>
-      <h2>CPSC 547 Information Visualisation Project Han Wang & Xin Wang</h2>
-      <div style={{width: '70%', display: 'inline-block'}} className='mapContainer'>
-        <MapChart selectedView={selectedView} getDestination={getDestination} getOrigin={getOrigin}/>
-        
+      <h2>CPSC 547 Information Visualization Project Han Wang & Xin Wang</h2>
+      <div>
+        <div className='mapContainer'>
+          <MapChart selectedView={selectedView} getDestination={getDestination} getOrigin={getOrigin}/>
+        </div>
       </div>
       <div>
         <div className='insightsContainer'>
-          <InsightChart selectedView={selectedView} destination={appDestination} origin={appOrigin}/>
+            <InsightChart selectedView={selectedView} destination={appDestination} origin={appOrigin}/>
         </div>
         <div className='chartsContainer'>
           <Table selectedView={selectedView} destination={appDestination} origin={appOrigin}/>

@@ -58,9 +58,21 @@
   vertical-align: top;
 }
 
+.mapContainer {
+  width: 99%;
+  border: none;
+  border-style: ridge;
+  border-color: #fff;
+  color: rgb(0, 0, 0);
+  background-color: "#D37506";
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  margin: 20px;
+  display: inline-block;
+}
+
 .insightsContainer {
-  height: 360px;
   width: 360px;
+  height: 360px;
   border: none;
   border-style: ridge;
   border-color: #fff;
