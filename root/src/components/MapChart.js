@@ -60,7 +60,7 @@ export default function MapChart() {
          {({ geographies }) => {
             const currColor = scaleQuantize()
             .domain([lowerPop, upperPop])
-            .range(["#f7fbff", "#c4dbee", "#6daed5", "#2371b4", "#08306b"])
+            .range(["#f7fbff", "#e8f1fa", "#d9e7f5", "#2371b4", "#08306b"])
             console.log(lowerPop)
             console.log(upperPop)
             return geographies.map((geo) => {
