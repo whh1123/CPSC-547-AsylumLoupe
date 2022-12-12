@@ -1,4 +1,9 @@
 {
+    "title": {
+      "text": "Stacked Line",
+      "bottom": "0px",
+      "left": "center"
+    },
     "tooltip": {
       "trigger": "axis",
       "axisPointer": {
@@ -6,75 +11,83 @@
       }
     },
     "legend": {},
-    "grid": {
-      "left": "3%",
-      "right": "4%",
-      "bottom": "3%",
-      "containLabel": true
-    },
     "yAxis": {
       "type": "value"
     },
     "xAxis": {
       "type": "category",
-      "data": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      "data": ["2008", "2009", "2010", "2011",
+      "2012", "2013", "2014", "2015","2016", "2017", "2018", "2019",
+      "2020", "2021"]
     },
     "series": [
       {
-        "name": "Direct",
+        "name": "Applicants age: Less than 18",
         "type": "bar",
         "stack": "total",
-        "label": {
-          "show": true
-        },
         "emphasis": {
           "focus": "series"
         },
         "data": [320, 302, 301, 334, 390, 330, 320]
       },
       {
-        "name": "Mail Ad",
+        "name": "Applicants age: 18 to 34",
         "type": "bar",
         "stack": "total",
-        "label": {
-          "show": true
-        },
         "emphasis": {
           "focus": "series"
         },
         "data": [120, 132, 101, 134, 90, 230, 210]
       },
       {
-        "name": "Affiliate Ad",
+        "name": "Applicants age: 35 to 64",
         "type": "bar",
         "stack": "total",
-        "label": {
-          "show": true
-        },
         "emphasis": {
           "focus": "series"
         },
         "data": [220, 182, 191, 234, 290, 330, 310]
       },
       {
-        "name": "Video Ad",
+        "name": "Applicants age: Greater than 64",
         "type": "bar",
         "stack": "total",
-        "label": {
-          "show": true
-        },
         "emphasis": {
           "focus": "series"
         },
         "data": [150, 212, 201, 154, 190, 330, 410]
       },
       {
-        "name": "Search Engine",
+        "name": "Resettles age: Less than 18",
         "type": "bar",
         "stack": "total",
-        "label": {
-          "show": true
+        "emphasis": {
+          "focus": "series"
         },
+        "data": [820, 832, 901, 934, 1290, 1330, 1320]
+      },
+      {
+        "name": "Resettles age: 18 to 34",
+        "type": "bar",
+        "stack": "total",
+        "emphasis": {
+          "focus": "series"
+        },
+        "data": [820, 832, 901, 934, 1290, 1330, 1320]
+      },
+      {
+        "name": "Resettles age: 35 to 64",
+        "type": "bar",
+        "stack": "total",
+        "emphasis": {
+          "focus": "series"
+        },
+        "data": [820, 832, 901, 934, 1290, 1330, 1320]
+      },
+      {
+        "name": "Resettles age: Greater than 64",
+        "type": "bar",
+        "stack": "total",
         "emphasis": {
           "focus": "series"
         },
