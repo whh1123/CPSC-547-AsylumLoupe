@@ -6,14 +6,21 @@ import countryData from './result.json';
 import { useState } from "react";
 import { Tooltip } from 'antd';
 
-var lowerPop = 0;
-var upperPop = 2587380; // app
-
+var upperPop = 0;
+// var upperPop = 2587380; // app
 // var upperPop = 38395; // res
 
 const geoUrl = require('../hooks/global_geo.json');
-var constructFill = ((f, destination, origin, countryName) => {
+
+export default function MapChart(props) {
+  const { getDestination, getOrigin } = props;
+  const [destination, setDestination] = useState("")
+  const [origin, setOrigin] = useState("")
+  const [upperPop, setUpperPop] = useState(0);
+
+  var constructFill = ((f, destination, origin, countryName) => {
   var trueColor = 0;
+  console.log("current Upper: " + upperPop + " for: " + countryName + " with f: " + f);
   if (destination) {
     if (origin) {
       // if (countryName === origin) { trueColor = 2 * 2 * upperPop; }
@@ -32,26 +39,23 @@ var constructFill = ((f, destination, origin, countryName) => {
   } else {
     // trueColor = upperPop - f;
     // to ensure when deselect everything, the upper and lower range go back to the default value.
-    lowerPop = 0;
-    upperPop = 2587380; // app
+    // lowerPop = 0;
+    // upperPop = 0;
+    // upperPop = 2587380; // app
     // upperPop = 38395; // res
     trueColor = upperPop - f;
   } 
   return trueColor;
 })
 
-export default function MapChart(props) {
-  const { getDestination, getOrigin } = props;
-  const [destination, setDestination] = useState("")
-  const [origin, setOrigin] = useState("")
-
-
   const handleClick = (properties, f) => () => {
     // var cn = properties.NAME ? properties.NAME : properties.name;
     // console.log("onClickCountry: " + cn);
     if (f === 0 && (!destination || !origin)) { return; }
 
-    var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    // var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    var  value = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+    
     // getOrigin(origin);
     // getDestination(destination);
     // console.log("inside MapCharts origin:" + origin);
@@ -63,11 +67,14 @@ export default function MapChart(props) {
       if (origin) {
         // getDestination(destination);
         // console.log("inside MapCharts destination2:" + getDestination(destination));
-        value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+        // value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+        setUpperPop(0);
+
         setDestination("");
         setOrigin("");
         getDestination("");
         getOrigin("");
+        return;
         // console.log("inside MapCharts origin:" + origin);
         // console.log("inside MapCharts destination1:" + destination);
       } else {
@@ -86,13 +93,12 @@ export default function MapChart(props) {
       // console.log("inside MapCharts origin:" + origin);
       // console.log("inside MapCharts destination3:" + destination);
    }
-   
-   value = value.flatMap((s) => s.sum);
-   lowerPop = Math.min(...value);
-   upperPop = Math.max(...value);
+    value = value.flatMap((s) => s.sum);
+    setUpperPop(Math.max(...value)); 
   };
 
   return (
+    <div>
     <ComposableMap  
         projection="geoMercator"
         projectionConfig={{
@@ -108,6 +114,27 @@ export default function MapChart(props) {
          {({ geographies }) => {
             // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
             var d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+
+            if (!destination && !origin && upperPop === 0) {
+              var result = d.reduce(function (hash) {
+                  return function (r, o) {
+                      if (!hash[o.geo]) {
+                          hash[o.geo] = [];
+                          r.push(hash[o.geo]);
+                      }
+                      hash[o.geo].push(o)
+                      return r;
+                  };
+              } (Object.create(null)), []);
+
+              result = result.map((s) => {
+                return {"sum": s.reduce((a, v) => a = a + v.sum, 0)}
+              });
+
+              result = result.flatMap((s) => s.sum);
+              setUpperPop(Math.max(...result)); 
+              console.log(upperPop);
+            }
            
             const currColor = scaleLinear()
             .domain([0, upperPop, upperPop * 2])
@@ -119,6 +146,7 @@ export default function MapChart(props) {
                 d = d.filter((s) => s.citizen === origin)
               } 
             } 
+
             return geographies.map((geo) => {
               var data = [];
               if (destination) {
@@ -157,6 +185,9 @@ export default function MapChart(props) {
       )}
     </ZoomableGroup>
     </ComposableMap>
+    <button>Application</button>
+    <button>Resettle</button>
+    </div>
   )
 }
 
