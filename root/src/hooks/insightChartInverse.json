@@ -15,25 +15,24 @@
     "yAxis": [
       {
         "type": "value",
-        "min": 0,
-        "max": 350
+        "max": 350,
+        "inverse": true
       },
       {
         "type": "value",
-        "min": 0,
         "max": 350
       }
     ],
     "series": [
       {
-        "type": "scatter",
-        "yAxisIndex": 1,
-        "data": [220, 182, 191, 234, 290, 330, 310],
-        "symbolSize": 10
+        "type": "bar",
+        "yAxisIndex": 0,
+        "barGap": "-100%",
+        "data": [20, 82, 91, 34, 90, 30, 10]
       },
       {
         "type": "bar",
-        "yAxisIndex": 0,
+        "yAxisIndex": 1,
         "data": [220, 182, 191, 234, 190, 230, 310]
       }
     ]

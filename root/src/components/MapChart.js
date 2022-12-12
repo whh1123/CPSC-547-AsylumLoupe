@@ -54,7 +54,7 @@ export default function MapChart(props) {
     if (f === 0 && (!destination || !origin)) { return; }
 
     // var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-    var  value = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+    var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
     
     // getOrigin(origin);
     // getDestination(destination);
@@ -113,7 +113,7 @@ export default function MapChart(props) {
          <Geographies geography={geoUrl}>
          {({ geographies }) => {
             // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            var d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+            var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
 
             if (!destination && !origin && upperPop === 0) {
               var result = d.reduce(function (hash) {
