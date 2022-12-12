@@ -22,17 +22,21 @@ function App() {
   
   return (
     <div className="App">
-      <h1>AsylumLoupe: EU Asylum Demographics and Movement</h1>
-      <h2>CPSC 547 Information Visualization Project Han Wang & Xin Wang</h2>
       <div>
+        <div style={{display: "inline-block"}}>
+          <div className='titleContainer'>
+            <h2>AsylumLoupe: EU Asylum Demographics and Movement</h2>
+            <h3>CPSC 547 Information Visualization Project Han Wang & Xin Wang</h3>
+          </div>
+          <div className='insightsContainer'>
+            <InsightChart selectedView={selectedView} destination={appDestination} origin={appOrigin}/>
+          </div>
+        </div>
         <div className='mapContainer'>
           <MapChart selectedView={selectedView} getDestination={getDestination} getOrigin={getOrigin}/>
         </div>
       </div>
       <div>
-        <div className='insightsContainer'>
-            <InsightChart selectedView={selectedView} destination={appDestination} origin={appOrigin}/>
-        </div>
         <div className='chartsContainer'>
           <Table selectedView={selectedView} destination={appDestination} origin={appOrigin}/>
         </div>
