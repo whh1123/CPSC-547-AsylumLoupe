@@ -9,7 +9,7 @@ export default function Table(props) {
     const countries_to_iso = require('../hooks/countries_to_iso_a2.json');
 
     const getCountryName = (iso) => {
-        return countries_to_iso.find((s) => s["code"] === iso)["name"]
+        return countries_to_iso.find((s) => s.code === iso)?.name
     }
 
     if (selectedView === "people"){
@@ -20,7 +20,7 @@ export default function Table(props) {
             }
             var people_charts_option = require("../hooks/people_bar_charts.json");
 
-            const applicants = presentedData.filter((s) => s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]));
+            const applicants = presentedData.filter((s) => s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
             people_charts_option.series[0].data = applicants;
 
             const resettles = presentedData.filter((s) => s.type === "RES").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]),  [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
@@ -43,16 +43,16 @@ export default function Table(props) {
             }
             var gender_charts_option = require("../hooks/gender_line_charts.json");
 
-            const maleApp = presentedData.filter((s) => s.sex === "M" && s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]));
+            const maleApp = presentedData.filter((s) => s.sex === "M" && s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
             gender_charts_option.series[0].data = maleApp;
 
-            const maleRes = presentedData.filter((s) => s.sex === "M" && s.type === "RES").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]));
+            const maleRes = presentedData.filter((s) => s.sex === "M" && s.type === "RES").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
             gender_charts_option.series[1].data = maleRes;
 
-            const femaleApp = presentedData.filter((s) => s.sex === "F" && s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]));
+            const femaleApp = presentedData.filter((s) => s.sex === "F" && s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
             gender_charts_option.series[2].data = femaleApp;
 
-            const femaleRes = presentedData.filter((s) => s.sex === "F" && s.type === "RES").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]));
+            const femaleRes = presentedData.filter((s) => s.sex === "F" && s.type === "RES").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
             gender_charts_option.series[3].data = femaleRes;
 
             const otherApp = presentedData.filter((s) => s.sex === "UNK" && s.type === "ASY_APP").map((s) => s.numbers).reduce((acc, val) => acc.map((el, i) => el + val[i]), [0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
