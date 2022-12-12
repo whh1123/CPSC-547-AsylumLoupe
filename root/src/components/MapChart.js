@@ -113,8 +113,28 @@ export default function MapChart(props) {
          <Geographies geography={geoUrl}>
          {({ geographies }) => {
             // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-           
+            var d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+
+            if (!destination && !origin && upperPop === 0) {
+              var result = d.reduce(function (hash) {
+                  return function (r, o) {
+                      if (!hash[o.geo]) {
+                          hash[o.geo] = [];
+                          r.push(hash[o.geo]);
+                      }
+                      hash[o.geo].push(o)
+                      return r;
+                  };
+              } (Object.create(null)), []);
+
+              result = result.map((s) => {
+                return {"sum": s.reduce((a, v) => a = a + v.sum, 0)}
+              });
+
+              result = result.flatMap((s) => s.sum);
+              setUpperPop(Math.max(...result)); 
+              console.log(upperPop);
+            }           
             const currColor = scaleLinear()
             .domain([0, upperPop, upperPop * 2])
             .range(["#310354", "#f3eeeb", "#9c2a00"])
@@ -167,6 +187,7 @@ export default function MapChart(props) {
     <button>Application</button>
     <button>Resettle</button>
     </div>
+
   )
 }
 
