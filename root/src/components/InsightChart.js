@@ -10,7 +10,7 @@ export default function InsightChart(props) {
     }
     if(destination && !origin){
         return <div className="insightOnlyDest">
-        <p>Original citizenship of the most asylum applications and resettlements recevied by {getCountryName(destination)}</p>
+        <p>Original citizenship of the most asylum applications and resettlements received by {getCountryName(destination)}</p>
         <InsightBarChart destination={destination} origin={origin}/>
     
         {/* <h4>Selected View: {selectedView}</h4>
