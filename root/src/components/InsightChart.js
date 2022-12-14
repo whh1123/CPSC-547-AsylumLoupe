@@ -9,30 +9,30 @@ export default function InsightChart(props) {
     const countries_to_iso = require('../hooks/countries_to_iso_a2.json');
 
     const getCountryName = (iso) => {
-        return countries_to_iso.find((s) => s["code"] === iso)["name"]
+        return countries_to_iso.find((s) => s["code"] === iso)?.name
     }
     if(destination && !origin){
         return <div className="insightOnlyDest">
-        <p>Original citizenship of the most asylum applications and resettlements recevied by {getCountryName(destination)}</p>
+        <p>Original citizenship of the most asylum applications and resettlements received by {getCountryName(destination)}</p>
         <InsightFlowChart destination={destination} origin={origin}/>
     </div>
     }
     else if(destination && origin){
         return <div className="insightOnlyDest">
-        <p style={{margin: "4px"}}>Asylum seekers from {origin} to {destination}</p>
+        <p style={{margin: "4px"}}>Asylum seekers from {getCountryName(origin)} to {getCountryName(destination)}</p>
         <div className="applyRate" style={{display: "inline-block", verticalAlign: "top"}}>
-            <p className="applyRate">Ratio: asylum application received from {destination} made by {origin}</p>
+            <p className="applyRate">Ratio: asylum application received from {getCountryName(destination)} made by {getCountryName(origin)}</p>
             <RatioChartDesOriApp destination={destination} origin={origin}/>
             </div>
         <div className="resettleRate" style={{display: "inline-block", verticalAlign: "top"}}>
-            <p className="resettleRate">Ratio: resettled refugees in {destination} are originally citizens from {origin}</p>
+            <p className="resettleRate">Ratio: resettled refugees in {getCountryName(destination)} are originally citizens from {getCountryName(origin)}</p>
             <RatioChartDesOriRes destination={destination} origin={origin}/>
             </div>
-        <div className="totalApplication" style={{display: "inline-block", verticalAlign: "top"}}>
-            <p className="totalApplication">Statistics: {origin} citizens seeked asylums in {destination}</p>
+        {/* <div className="totalApplication" style={{display: "inline-block", verticalAlign: "top"}}>
+            <p className="totalApplication">Statistics: {getCountryName(origin)} citizens seeked asylums in {getCountryName(destination)}</p>
             <p className="totalApplication">from 2008 to 2021</p>
             <InsightIncreasementChart destination={destination} origin={origin}/>
-        </div>
+        </div> */}
         
     </div>
     }

@@ -25,7 +25,7 @@ function App() {
       <div>
         <div style={{display: "inline-block"}}>
           <div className='titleContainer'>
-            <h2 style={{margin:"20px", verticalAlign:"center"}}><b>AsylumLoupe: EU Asylum Demographics and Movement</b></h2>
+            <h2 style={{margin:"20px", verticalAlign:"center", "font-weight": "bold"}}>AsylumLoupe: EU Asylum Demographics and Movement</h2>
             <h2 style={{textAlign:"center", verticalAlign:"center"}}>CPSC 547 Information Visualization Project Han & Xin</h2>
           </div>
           <div className='insightsContainer'>
