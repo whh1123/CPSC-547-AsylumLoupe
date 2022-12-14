@@ -25,8 +25,8 @@ function App() {
       <div>
         <div style={{display: "inline-block"}}>
           <div className='titleContainer'>
-            <h2>AsylumLoupe: EU Asylum Demographics and Movement</h2>
-            <h3>CPSC 547 Information Visualization Project Han Wang & Xin Wang</h3>
+            <h2 style={{margin:"20px", verticalAlign:"center"}}><b>AsylumLoupe: EU Asylum Demographics and Movement</b></h2>
+            <h2 style={{textAlign:"center", verticalAlign:"center"}}>CPSC 547 Information Visualization Project Han & Xin</h2>
           </div>
           <div className='insightsContainer'>
             <InsightChart selectedView={selectedView} destination={appDestination} origin={appOrigin}/>

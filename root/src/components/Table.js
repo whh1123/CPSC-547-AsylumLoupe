@@ -112,11 +112,7 @@ export default function Table(props) {
         </div>
     } else {
         return <div>
-            <h2>Table</h2>
-            <h3>Please choose a country and select an option to view.</h3>
-            <h3>{selectedView}</h3>
-            <h3>{origin}</h3>
-            <h3>{destination}</h3>
+            <h2><b>Please choose a country and select an option to view.</b></h2>
         </div>  
     }
 }

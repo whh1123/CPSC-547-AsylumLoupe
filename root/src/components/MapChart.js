@@ -9,9 +9,8 @@ import { Tooltip } from 'antd';
 var upperPop = 0;
 // var upperPop = 2587380; // app
 // var upperPop = 38395; // res
-
 const geoUrl = require('../hooks/global_geo.json');
-
+var mapType = "application"
 export default function MapChart(props) {
   const { getDestination, getOrigin } = props;
   const [destination, setDestination] = useState("")
@@ -54,7 +53,16 @@ export default function MapChart(props) {
     if (f === 0 && (!destination || !origin)) { return; }
 
     // var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-    var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    // var  value = [];
+    // if(mapType === "application"){
+    //   value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    // }
+    // else{
+    //   value = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+    // }
+    var value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+
+    
     
     // getOrigin(origin);
     // getDestination(destination);
@@ -113,8 +121,14 @@ export default function MapChart(props) {
          <Geographies geography={geoUrl}>
          {({ geographies }) => {
             // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+            // var d = [];
+            // if(mapType === "application"){
+            //   d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+            // }
+            // else{
+            //   d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+            // }
             var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-
             if (!destination && !origin && upperPop === 0) {
               var result = d.reduce(function (hash) {
                   return function (r, o) {
@@ -184,10 +198,13 @@ export default function MapChart(props) {
       )}
     </ZoomableGroup>
     </ComposableMap>
-    <button>Application</button>
-    <button>Resettle</button>
+    <Tooltip title="Display application map">
+    <button id={"application"} onClick={mapType = "application"}>Application</button>
+    </Tooltip>
+    <Tooltip title="Display resettlement map">
+    <button id={"resettle"} onClick={mapType = "resettlement"}>Resettlement</button>
+    </Tooltip>
     </div>
 
   )
 }
-

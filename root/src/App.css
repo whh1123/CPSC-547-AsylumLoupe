@@ -46,7 +46,7 @@
 
 .chartsContainer {
   height: 360px;
-  width: 1270px;
+  width: 1450px;
   border: none;
   border-style: ridge;
   border-color: #fff;
@@ -71,7 +71,7 @@
 
 .insightsContainer {
   width: 450px;
-  height: 450px;
+  height: 750px;
   border: none;
   border-style: ridge;
   border-color: #fff;
@@ -84,7 +84,7 @@
 
 .titleContainer {
   width: 450px;
-  height: 230px;
+  height: 100px;
   border: none;
   border-style: ridge;
   border-color: #fff;

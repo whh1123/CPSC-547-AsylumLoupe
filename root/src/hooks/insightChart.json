@@ -1,0 +1,88 @@
+{
+    "tooltip": {
+        "trigger": "item",
+        "triggerOn": "mousemove"
+      },
+    "series": {
+      "type": "sankey",
+      "layout": "none",
+      "emphasis": {
+      "focus": "adjacency"
+      },
+      "data": [
+        {
+          "name": "No. of applications"
+        },
+        {
+          "name": "No. of resettlements"
+        },
+        {
+          "name": "a1"
+        },
+        {
+            "name": "a2"
+        },
+        {
+            "name": "a3"
+        },
+        {
+            "name": "a4"
+        },
+        {
+            "name": "a5"
+        }
+      ],
+      "links": [
+        {
+          "source": "No. of applications",
+          "target": "a1",
+          "value": 5
+        },
+        {
+          "source": "No. of applications",
+          "target": "a2",
+          "value": 3
+        },
+        {
+            "source": "No. of applications",
+            "target": "a3",
+            "value": 3
+        },
+        {
+            "source": "No. of applications",
+            "target": "a4",
+            "value": 3
+        },
+        {
+            "source": "No. of applications",
+            "target": "a5",
+            "value": 3
+        },
+        {
+          "source": "a1",
+          "target": "No. of resettlements",
+          "value": 8
+        },
+        {
+            "source": "a2",
+            "target": "No. of resettlements",
+            "value": 8
+        },
+        {
+            "source": "a3",
+            "target": "No. of resettlements",
+            "value": 8
+        },
+        {
+            "source": "a4",
+            "target": "No. of resettlements",
+            "value": 8
+        },
+        {
+            "source": "a5",
+            "target": "No. of resettlements",
+            "value": 8
+        }
+      ]
+    }
+  }
