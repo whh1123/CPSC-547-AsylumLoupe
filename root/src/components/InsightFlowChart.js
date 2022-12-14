@@ -1,11 +1,6 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react"
 import countryData from './result.json';
-import { useState } from "react";
-import { scaleLog, scaleLinear } from "d3-scale";
-
-
-
 
 export default function InsightFlowChart(props) {
     const {origin, destination} = props;
@@ -21,7 +16,7 @@ export default function InsightFlowChart(props) {
     var top5AppList = [...appList].slice(0, 5);
     var options = require("../hooks/insightChart.json");
     // var maxAppNum = Math.max(...(top5AppList.flatMap((s) => s.sum)));
-    var applicationSum = top5AppList.reduce((a, v) => a = a + v.sum, 0)
+    // var applicationSum = top5AppList.reduce((a, v) => a = a + v.sum, 0)
 
     
     // get origin countries for resettlement data
@@ -40,7 +35,7 @@ export default function InsightFlowChart(props) {
         console.log("newRes added: " + oriCountriesRes[oriCountriesRes.length - 1]);
     }
     console.log("resList: " + oriCountriesRes[0] + ";" + oriCountriesRes[1] + ";" + oriCountriesRes[2] + ";" + oriCountriesRes[3] + ";" + oriCountriesRes[4] + ";" + oriCountriesRes[5] + ";" + oriCountriesRes[6]); // sorted origin country list for application data
-    var resettlementSum = oriCountriesRes.reduce((a, v) => a = a + v, 0)
+    // var resettlementSum = oriCountriesRes.reduce((a, v) => a = a + v, 0)
 
     options["series"]["data"][2]["name"] = top5AppList[0].citizen
     options["series"]["data"][3]["name"] = top5AppList[1].citizen
@@ -74,7 +69,7 @@ export default function InsightFlowChart(props) {
     return <div id="Top7TypeBar">
         <ReactEcharts
             option={options}
-            style={{ width: "400px", height: "400px", alignItems: "center", justifyContent: "center" }}
+            style={{ width: "400px", height: "730px", alignItems: "center", justifyContent: "center" }}
         ></ReactEcharts>  
     </div>
 }

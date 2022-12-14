@@ -3,17 +3,16 @@
       "trigger": "item"
     },
     "legend": {
-      "top": "5%",
-      "left": "center"
+      "top": "1%"
     },
     "series": [
       {
-        "name": "App&Res Ratio",
+        "name": "Application Ratio",
         "type": "pie",
         "radius": ["40%", "70%"],
         "avoidLabelOverlap": false,
         "itemStyle": {
-          "borderRadius": 10,
+          "borderRadius": 5,
           "borderColor": "#fff",
           "borderWidth": 2
         },
@@ -24,7 +23,7 @@
         "emphasis": {
           "label": {
             "show": true,
-            "fontSize": 40,
+            "fontSize": 20,
             "fontWeight": "bold"
           }
         },
