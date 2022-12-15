@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: report.aux
+The style file: abbrv-doi-hyperref.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: template.bib
+Warning--to sort, need author or key in the_european_commission:2022
+Warning--to sort, need author or key in consilium:2022
+Warning--to sort, need author or key in data_browser_eurostat:2020
+Warning--to sort, need author or key in wiki_eurostat:2022
+Warning--to sort, need author or key in eur_law:2007
+You've used 12 entries,
+            2608 wiz_defined-function locations,
+            661 strings with 6091 characters,
+and the built_in function-call counts, 3994 in all, are:
+= -- 571
+> -- 71
+< -- 64
++ -- 98
+- -- 21
+* -- 212
+:= -- 537
+add.period$ -- 23
+call.type$ -- 12
+change.case$ -- 43
+chr.to.int$ -- 0
+cite$ -- 17
+duplicate$ -- 103
+empty$ -- 425
+format.name$ -- 20
+if$ -- 1048
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 7
+newline$ -- 55
+num.names$ -- 14
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 34
+quote$ -- 0
+skip$ -- 91
+stack$ -- 0
+substring$ -- 159
+swap$ -- 12
+text.length$ -- 34
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 5
+while$ -- 17
+width$ -- 14
+write$ -- 132
+(There were 5 warnings)
