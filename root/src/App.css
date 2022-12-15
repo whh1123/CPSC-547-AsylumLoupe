@@ -59,11 +59,22 @@
 
 .chartsContainer {
   height: 360px;
-  width: 720px;
+  width: 1450px;
   border: none;
   border-style: ridge;
   border-color: #fff;
-  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  margin: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.mapContainer {
+  width: 60%;
+  border: none;
+  border-style: ridge;
+  border-color: #fff;
+  color: rgb(0, 0, 0);
   background-color: "#D37506";
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
   margin: 20px;
@@ -72,21 +83,35 @@
 }
 
 .insightsContainer {
-  height: 360px;
-  width: 360px;
+  width: 450px;
+  height: 750px;
   border: none;
   border-style: ridge;
   border-color: #fff;
-  color: #fff;
+  color: rgb(0, 0, 0);
   background-color: "#D37506";
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
   margin: 20px;
-  display: inline-block;
+  /* display: inline-block; */
+}
+
+.titleContainer {
+  width: 450px;
+  height: 100px;
+  border: none;
+  border-style: ridge;
+  border-color: #fff;
+  color: rgb(0, 0, 0);
+  background-color: "#D37506";
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19);
+  margin: 20px;
+  text-align: center;
+  /* display: inline-block; */
 }
 
 .buttonsContainer {
   height: 360px;
-  width: 180px;
+  width: 120px;
   margin: 20px;
   display: inline-block;
   vertical-align: top;
@@ -94,7 +119,7 @@
 
 .buttonStyle {
   height: 100px;
-  width: 140px;
+  width: 100px;
   margin: 20px;
   display: block;
 }

@@ -1,0 +1,45 @@
+{  
+    "legend": {
+    "top": "2%",
+    "left": "center"
+},
+    "tooltip": {
+      "trigger": "axis",
+      "axisPointer": {
+        "type": "none"
+      }
+    },
+    "xAxis": {
+      "data": ["total application from 2008 to 2021"],
+      "axisTick": { "show": false },
+      "axisLine": { "show": false },
+      "axisLabel": {
+        "color": "#269e32"
+      }
+    },
+    "yAxis": {
+      "splitLine": { "show": false },
+      "axisTick": { "show": false },
+      "axisLine": { "show": false },
+      "axisLabel": { "show": false }
+    },
+    "color": ["#269e32"],
+    "series": [
+      {
+        "name": "increasement",
+        "type": "pictorialBar",
+        "barCategoryGap": "-10%",
+        "symbol": "path://M0,10 L10,10 L5,0 L0,10 z",
+        "itemStyle": {
+          "opacity": 0.8
+        },
+        "emphasis": {
+          "itemStyle": {
+            "opacity": 1
+          }
+        },
+        "data": [100],
+        "z": 100
+      }
+    ]
+  }

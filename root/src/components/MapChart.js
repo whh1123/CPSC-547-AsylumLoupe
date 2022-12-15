@@ -2,42 +2,113 @@ import React from "react"
 import { ComposableMap, Geographies, Geography, Sphere,
     Graticule, ZoomableGroup} from "react-simple-maps"
 import { scaleLinear } from "d3-scale";
-import myData from './result.json';
+import countryData from './result.json';
 import { useState } from "react";
+import { Tooltip } from 'antd';
 
-const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
+var upperPop = 0;
+// var upperPop = 2587380; // app
+// var upperPop = 38395; // res
+const geoUrl = require('../hooks/global_geo.json');
+var mapType = "application"
+export default function MapChart(props) {
+  const { getDestination, getOrigin } = props;
+  const [destination, setDestination] = useState("")
+  const [origin, setOrigin] = useState("")
+  const [upperPop, setUpperPop] = useState(0);
 
-const colorScale = scaleLinear()
-  .domain([840, 10392910])
-  .range(["#f7fbff", "#08306b"]);
+  var constructFill = ((f, destination, origin, countryName) => {
+  var trueColor = 0;
+  console.log("current Upper: " + upperPop + " for: " + countryName + " with f: " + f);
+  if (destination) {
+    if (origin) {
+      // if (countryName === origin) { trueColor = 2 * 2 * upperPop; }
+      // else if (countryName === destination) { trueColor = 0; }
+      // else { trueColor = upperPop; }
+      if (countryName === origin) { trueColor = upperPop * 2; }
+      else if (countryName === destination) { trueColor = 0; }
+      else { trueColor = upperPop; }
+    } else {
+      // if (countryName === destination) { trueColor = 0; }
+      // else { trueColor = f + upperPop + upperPop; }
+      // console.log("country: " + countryName + " trueColor: " + trueColor);
+      if (countryName === destination) { trueColor =  0; }
+      else { trueColor =  f + upperPop; }
+    }
+  } else {
+    // trueColor = upperPop - f;
+    // to ensure when deselect everything, the upper and lower range go back to the default value.
+    // lowerPop = 0;
+    // upperPop = 0;
+    // upperPop = 2587380; // app
+    // upperPop = 38395; // res
+    trueColor = upperPop - f;
+  } 
+  return trueColor;
+})
 
-export default function MapChart() {
-  // const [destination, setDestination] = useState("")
+  const handleClick = (properties, f) => () => {
+    // var cn = properties.NAME ? properties.NAME : properties.name;
+    // console.log("onClickCountry: " + cn);
+    if (f === 0 && (!destination || !origin)) { return; }
 
-  // const colorScale = scaleLinear()
-  // .domain([840, 10392910])
-  // .range(["#f7fbff", "#08306b"]);
+    // var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    // var  value = [];
+    // if(mapType === "application"){
+    //   value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+    // }
+    // else{
+    //   value = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
+    // }
+    var value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
 
-  // const handleClick = properties => () => {
-  //   console.log(properties);
-  //   if (destination) {
-  
-  //   } else {
-  //     setDestination(properties['Alpha-2'])
-  //   }
-  // };
+    
+    
+    // getOrigin(origin);
+    // getDestination(destination);
+    // console.log("inside MapCharts origin:" + origin);
+    // console.log("inside MapCharts destination3:" + destination);
 
+    if (destination) {
+      // getDestination(destination);
+      // console.log("inside MapCharts destination1:" + destination);
+      if (origin) {
+        // getDestination(destination);
+        // console.log("inside MapCharts destination2:" + getDestination(destination));
+        // value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+        setUpperPop(0);
 
-
-  // if (destination) {
-
-  // } else {
-  //   myData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-  // }
+        setDestination("");
+        setOrigin("");
+        getDestination("");
+        getOrigin("");
+        return;
+        // console.log("inside MapCharts origin:" + origin);
+        // console.log("inside MapCharts destination1:" + destination);
+      } else {
+        setOrigin(properties['iso_a2_eh'])
+        getOrigin(properties['iso_a2_eh']);
+        // getDestination(destination);
+        // console.log("inside MapCharts origin:" + origin);
+        // console.log("inside MapCharts destination2:" + destination);
+      }
+    } else {
+      getDestination(destination);
+      setDestination(properties['iso_a2_eh'])
+      value = value.filter((s) => s.geo === properties['iso_a2_eh'])
+      // getOrigin(origin);
+      getDestination(properties['iso_a2_eh']);
+      // console.log("inside MapCharts origin:" + origin);
+      // console.log("inside MapCharts destination3:" + destination);
+   }
+    value = value.flatMap((s) => s.sum);
+    setUpperPop(Math.max(...value)); 
+  };
 
   return (
+    <div>
     <ComposableMap  
+        projection="geoMercator"
         projectionConfig={{
         rotate: [0, 0, 0],
         scale: 147
@@ -46,39 +117,94 @@ export default function MapChart() {
     <ZoomableGroup center={[1.7, 47.8]} zoom={9}>
     <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
       <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-      {myData.length > 0 && (
+      {countryData.length > 0 && (
          <Geographies geography={geoUrl}>
-         {({ geographies }) =>
-           geographies.map((geo) => {
-            var d = myData.filter((s) => s.geo === geo.properties['Alpha-2'] && s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            // if (destination) {
-            //   d = myData.filter((s) => s.citizen === geo.properties['Alpha-2'] && s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T" && s.geo === destination);
-            // } else {
-            //   d = myData.filter((s) => s.geo === geo.properties['Alpha-2'] && s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+         {({ geographies }) => {
+            // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+            // var d = [];
+            // if(mapType === "application"){
+            //   d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
             // }
-            var f = 0;
-
-            // if (geo.properties['Alpha-2'] === destination) {
-            //   f = 100000;
+            // else{
+            //   d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
             // }
+            var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
+            if (!destination && !origin && upperPop === 0) {
+              var result = d.reduce(function (hash) {
+                  return function (r, o) {
+                      if (!hash[o.geo]) {
+                          hash[o.geo] = [];
+                          r.push(hash[o.geo]);
+                      }
+                      hash[o.geo].push(o)
+                      return r;
+                  };
+              } (Object.create(null)), []);
 
-            if (d.length) {
-              f = d.reduce((a, v) => a = a + v.sum, 0);
-            }
-            if (f > 0) {
-              console.log(geo.properties['Alpha-2']);
-              console.log(f);
-            }
-           return <Geography 
-           key={geo.rsmKey} geography={geo} 
-           fill={f > 0 ? colorScale(f) : "#F5F4F6"}
-          //  onClick={handleClick(geo.properties)}
-           />
-           })
+              result = result.map((s) => {
+                return {"sum": s.reduce((a, v) => a = a + v.sum, 0)}
+              });
+
+              result = result.flatMap((s) => s.sum);
+              setUpperPop(Math.max(...result)); 
+              console.log(upperPop);
+            }           
+            const currColor = scaleLinear()
+            .domain([0, upperPop, upperPop * 2])
+            .range(["#310354", "#f3eeeb", "#9c2a00"])
+
+            if (destination) {
+              d = d.filter((s) => s.geo === destination)
+              if (origin) {
+                d = d.filter((s) => s.citizen === origin)
+              } 
+            } 
+
+            return geographies.map((geo) => {
+              var data = [];
+              if (destination) {
+                // find origin 
+                data = d.filter((s) => s.citizen === geo.properties['iso_a2_eh']);
+              } else {
+                data = d.filter((s) => s.geo === geo.properties['iso_a2_eh']);
+              }
+
+              var f = 0;
+  
+              if (data.length) {
+                f = data.reduce((a, v) => a = a + v.sum, 0)
+              }
+
+              var toolTipData = geo.properties["NAME"] ? geo.properties["NAME"] : geo.properties["name"] + ": " + f;
+             return <Tooltip key={geo.rsmKey} title={toolTipData}>
+                <Geography 
+              key={geo.rsmKey} geography={geo} 
+              style={{
+                default: { outline: "none" },
+                hover: { outline: "none" },
+                pressed: { outline: "none" },
+              }}
+              fill={(f === 0 && (geo.properties['iso_a2_eh'] !== destination) && (geo.properties['iso_a2_eh'] !== origin)) ? "#d3d3d3" : currColor(constructFill(f, destination, origin, geo.properties['iso_a2_eh']))}
+              onClick={handleClick(geo.properties, f)}
+              />
+             </Tooltip>
+             
+             
+             })
+         }
+           
          }
        </Geographies>
       )}
     </ZoomableGroup>
     </ComposableMap>
+    <Tooltip title="Display application map">
+    <button id={"application"} onClick={mapType = "application"}>Application</button>
+    </Tooltip>
+    <Tooltip title="Display resettlement map">
+    <button id={"resettle"} onClick={mapType = "resettlement"}>Resettlement</button>
+    </Tooltip>
+    </div>
+
   )
 }
