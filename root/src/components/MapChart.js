@@ -11,12 +11,13 @@ var upperPop = 0;
 // var upperPop = 38395; // res
 const geoUrl = require('../hooks/global_geo.json');
 var mapType = "application"
+
 export default function MapChart(props) {
   const { getDestination, getOrigin } = props;
   const [destination, setDestination] = useState("")
   const [origin, setOrigin] = useState("")
   const [upperPop, setUpperPop] = useState(0);
-
+  
   var constructFill = ((f, destination, origin, countryName) => {
   var trueColor = 0;
   console.log("current Upper: " + upperPop + " for: " + countryName + " with f: " + f);
@@ -175,7 +176,7 @@ export default function MapChart(props) {
                 f = data.reduce((a, v) => a = a + v.sum, 0)
               }
 
-              var toolTipData = geo.properties["NAME"] ? geo.properties["NAME"] : geo.properties["name"] + ": " + f;
+              var toolTipData = geo.properties["NAME"] ? ("Total " + geo.properties["NAME"] + " Applicants: ") : ("Total " + geo.properties["name"] + " Applicants: ") + f;
              return <Tooltip key={geo.rsmKey} title={toolTipData}>
                 <Geography 
               key={geo.rsmKey} geography={geo} 
@@ -199,10 +200,20 @@ export default function MapChart(props) {
     </ZoomableGroup>
     </ComposableMap>
     <Tooltip title="Display application map">
-    <button id={"application"} onClick={mapType = "application"}>Application</button>
+    <button id={"application"} onClick={mapType = "application"} style={{
+            background: "#310354",
+            "font-weight": "bold",
+            margin: "0 auto",
+            color: "white"
+            }}>Application</button>
     </Tooltip>
     <Tooltip title="Display resettlement map">
-    <button id={"resettle"} onClick={mapType = "resettlement"}>Resettlement</button>
+    <button id={"resettle"} onClick={mapType = "resettlement"} style={{
+            background: "#9c2a00",
+            "font-weight": "bold",
+            margin: "0 auto",
+            color: "white"
+            }}>Resettlement</button>
     </Tooltip>
     </div>
 

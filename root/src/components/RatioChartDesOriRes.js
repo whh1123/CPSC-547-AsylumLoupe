@@ -4,7 +4,12 @@ import countryData from './result.json';
 
 export default function RatioChartDesOriRes(props) {
     const {origin, destination} = props;
-    
+    const countries_to_iso = require('../hooks/countries_to_iso_a2.json');
+
+    const getCountryName = (iso) => {
+        return countries_to_iso.find((s) => s["code"] === iso)?.name
+    }
+
     if(destination && origin){}
     // get origin country for resettlement data
     var oriCountryRes = countryData.filter((s) => s.geo === destination && s.citizen === origin && s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
@@ -25,7 +30,7 @@ export default function RatioChartDesOriRes(props) {
     options["series"][0]["data"][0]["name"] = origin + "/ " + destination + " : " + Math.trunc((OR / DR) * 100) + "%"
     options["series"][0]["data"][1]["value"] = TR
     options["series"][0]["data"][1]["name"] = "Other / " + destination + " : " + Math.trunc((TR / DR) * 100) + "%"
-
+    options.title.text = Math.trunc((OR / DR) * 100) + "% of asylum resettlmemnts received from \n" + getCountryName(destination) + " are given to " + getCountryName(origin) + " citizens";
 
     return <div id="Top7TypeBar">
         <ReactEcharts
