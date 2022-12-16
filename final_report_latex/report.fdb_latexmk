@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1671173651 "report.aux" "report.bbl" "report" 1671173653
+["bibtex report"] 1671173651 "report.aux" "report.bbl" "report" 1671234553
   "./abbrv-doi-hyperref.bst" 1671147303 27234 15ac2d19f45c7719533be5c754d04e78 ""
-  "report.aux" 1671173653 6877 57213e3b54664dd2c9a92c3da1357d53 "pdflatex"
+  "report.aux" 1671234553 6877 57213e3b54664dd2c9a92c3da1357d53 "pdflatex"
   "template.bib" 1671147303 6217 5f201a6f03efad7cab67a77e89806624 ""
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1671173652 "/Users/wangxin/Project/CPSC-547-New-Energy-Vehicle/final_report_latex/report.tex" "report.pdf" "report" 1671173653
-  "/Users/wangxin/Project/CPSC-547-New-Energy-Vehicle/final_report_latex/report.tex" 1671173649 41151 a787616908ea8e011ee332dc9722c27a ""
+["pdflatex"] 1671234552 "/Users/wangxin/Project/CPSC-547-New-Energy-Vehicle/final_report_latex/report.tex" "report.pdf" "report" 1671234553
+  "/Users/wangxin/Project/CPSC-547-New-Energy-Vehicle/final_report_latex/report.tex" 1671234551 42365 a54087bb71f59d851d3f4bb8e5a3e162 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/helvetic/phvb7t.tfm" 1136768653 2240 eb56c13537f4d8a0bd3fafc25572b1bd ""
@@ -115,10 +115,10 @@
   "pictures//fig5.jpeg" 1671147303 22265 c337f2cbbc4ac634936c606bee048c46 ""
   "pictures//tab3.png" 1671147303 28613 80a395f3f70f8c8ff1c3c09fca114dc3 ""
   "pictures//tab4.png" 1671147303 24588 b0e1ad0661b4e0fcbecaa312a5f2c32f ""
-  "report.aux" 1671173653 6877 57213e3b54664dd2c9a92c3da1357d53 "pdflatex"
+  "report.aux" 1671234553 6877 57213e3b54664dd2c9a92c3da1357d53 "pdflatex"
   "report.bbl" 1671173652 3129 42dfde4b18c8c4ce2f8227e60cf4fea4 "bibtex report"
-  "report.out" 1671173653 2825 6ae1f80b1bb68185d76b3516175effe9 "pdflatex"
-  "report.tex" 1671173649 41151 a787616908ea8e011ee332dc9722c27a ""
+  "report.out" 1671234553 2825 6ae1f80b1bb68185d76b3516175effe9 "pdflatex"
+  "report.tex" 1671234551 42365 a54087bb71f59d851d3f4bb8e5a3e162 ""
   "vgtc.cls" 1671147303 35277 d2dd91cf62dc972e2fa075c9ab20a4b4 ""
   (generated)
   "report.aux"
