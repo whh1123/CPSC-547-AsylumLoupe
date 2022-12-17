@@ -1,4 +1,9 @@
 {
+    "title": {
+      "text": "Stacked Line",
+      "bottom": "0px",
+      "left": "center"
+    },
     "tooltip": {
       "trigger": "item"
     },
