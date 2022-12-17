@@ -7,8 +7,6 @@ import { useState } from "react";
 import { Tooltip } from 'antd';
 
 var upperPop = 0;
-// var upperPop = 2587380; // app
-// var upperPop = 38395; // res
 const geoUrl = require('../hooks/global_geo.json');
 var mapType = "application"
 
@@ -23,60 +21,25 @@ export default function MapChart(props) {
   console.log("current Upper: " + upperPop + " for: " + countryName + " with f: " + f);
   if (destination) {
     if (origin) {
-      // if (countryName === origin) { trueColor = 2 * 2 * upperPop; }
-      // else if (countryName === destination) { trueColor = 0; }
-      // else { trueColor = upperPop; }
       if (countryName === origin) { trueColor = upperPop * 2; }
       else if (countryName === destination) { trueColor = 0; }
       else { trueColor = upperPop; }
     } else {
-      // if (countryName === destination) { trueColor = 0; }
-      // else { trueColor = f + upperPop + upperPop; }
-      // console.log("country: " + countryName + " trueColor: " + trueColor);
       if (countryName === destination) { trueColor =  0; }
       else { trueColor =  f + upperPop; }
     }
   } else {
-    // trueColor = upperPop - f;
-    // to ensure when deselect everything, the upper and lower range go back to the default value.
-    // lowerPop = 0;
-    // upperPop = 0;
-    // upperPop = 2587380; // app
-    // upperPop = 38395; // res
     trueColor = upperPop - f;
   } 
   return trueColor;
 })
 
   const handleClick = (properties, f) => () => {
-    // var cn = properties.NAME ? properties.NAME : properties.name;
-    // console.log("onClickCountry: " + cn);
     if (f === 0 && (!destination || !origin)) { return; }
-
-    // var  value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-    // var  value = [];
-    // if(mapType === "application"){
-    //   value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-    // }
-    // else{
-    //   value = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
-    // }
     var value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
 
-    
-    
-    // getOrigin(origin);
-    // getDestination(destination);
-    // console.log("inside MapCharts origin:" + origin);
-    // console.log("inside MapCharts destination3:" + destination);
-
     if (destination) {
-      // getDestination(destination);
-      // console.log("inside MapCharts destination1:" + destination);
       if (origin) {
-        // getDestination(destination);
-        // console.log("inside MapCharts destination2:" + getDestination(destination));
-        // value = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
         setUpperPop(0);
 
         setDestination("");
@@ -84,23 +47,15 @@ export default function MapChart(props) {
         getDestination("");
         getOrigin("");
         return;
-        // console.log("inside MapCharts origin:" + origin);
-        // console.log("inside MapCharts destination1:" + destination);
       } else {
         setOrigin(properties['iso_a2_eh'])
         getOrigin(properties['iso_a2_eh']);
-        // getDestination(destination);
-        // console.log("inside MapCharts origin:" + origin);
-        // console.log("inside MapCharts destination2:" + destination);
       }
     } else {
       getDestination(destination);
       setDestination(properties['iso_a2_eh'])
       value = value.filter((s) => s.geo === properties['iso_a2_eh'])
-      // getOrigin(origin);
       getDestination(properties['iso_a2_eh']);
-      // console.log("inside MapCharts origin:" + origin);
-      // console.log("inside MapCharts destination3:" + destination);
    }
     value = value.flatMap((s) => s.sum);
     setUpperPop(Math.max(...value)); 
@@ -121,14 +76,6 @@ export default function MapChart(props) {
       {countryData.length > 0 && (
          <Geographies geography={geoUrl}>
          {({ geographies }) => {
-            // var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            // var d = [];
-            // if(mapType === "application"){
-            //   d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
-            // }
-            // else{
-            //   d = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T");
-            // }
             var d = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T");
             if (!destination && !origin && upperPop === 0) {
               var result = d.reduce(function (hash) {

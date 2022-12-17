@@ -26,9 +26,9 @@ export default function RatioChartDesOriRes(props) {
     // var TR = DR - OR
  
     var options = require("../hooks/insightDesOriRes.json");
-    options["series"][0]["data"][0]["value"] = OR
+    options["series"][0]["data"][0]["value"] = Math.trunc((OR / DR) * 100)
     options["series"][0]["data"][0]["name"] = origin + "/ " + destination + " : " + Math.trunc((OR / DR) * 100) + "%"
-    options["series"][0]["data"][1]["value"] = TR
+    options["series"][0]["data"][1]["value"] = Math.trunc((TR / DR) * 100)
     options["series"][0]["data"][1]["name"] = "Other / " + destination + " : " + Math.trunc((TR / DR) * 100) + "%"
     options.title.text = Math.trunc((OR / DR) * 100) + "% of asylum resettlmemnts received from \n" + getCountryName(destination) + " are given to " + getCountryName(origin) + " citizens";
 

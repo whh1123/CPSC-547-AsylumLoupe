@@ -1,6 +1,5 @@
 import './App.css';
 import InsightChart from './components/InsightChart';
-// import HealthRegionList from './components/HealthRegionList';
 import MapChart from './components/MapChart';
 import Table from './components/Table';
 import { useState } from "react";
@@ -11,12 +10,10 @@ function App() {
 
   var getDestination = (currDestination) => {
     setAppDestination(currDestination);
-    console.log("get destination in app.js: " + currDestination);
   };
 
   var getOrigin = (currOrigin) => {
     setAppOrigin(currOrigin);
-    console.log("get origin in app.js: " + currOrigin);
   };
   
   

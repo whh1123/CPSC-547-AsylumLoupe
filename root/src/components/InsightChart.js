@@ -2,7 +2,6 @@ import React from "react";
 import InsightFlowChart from "./InsightFlowChart";
 import RatioChartDesOriApp from "./RatioChartDesOriApp";
 import RatioChartDesOriRes from "./RatioChartDesOriRes";
-import InsightIncreasementChart from "./InsightIncreasementChart";
 export default function InsightChart(props) {
     const {origin, destination} = props
     // console.log("get destination in insights.js: " + destination);
@@ -22,15 +21,10 @@ export default function InsightChart(props) {
         <p style={{margin: "4px", "font-weight": "bold"}}>Asylum seekers from {getCountryName(origin)} to {getCountryName(destination)}</p>
         <div className="applyRate">
             <RatioChartDesOriApp destination={destination} origin={origin}/>
-            </div>
+        </div>
         <div className="resettleRate">
             <RatioChartDesOriRes destination={destination} origin={origin}/>
-            </div>
-        {/* <div className="totalApplication" style={{display: "inline-block", verticalAlign: "top"}}>
-            <p className="totalApplication">Statistics: {getCountryName(origin)} citizens seeked asylums in {getCountryName(destination)}</p>
-            <p className="totalApplication">from 2008 to 2021</p>
-            <InsightIncreasementChart destination={destination} origin={origin}/>
-        </div> */}
+        </div>
     </div>
     }
 

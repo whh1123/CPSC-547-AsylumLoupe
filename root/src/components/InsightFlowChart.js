@@ -4,7 +4,12 @@ import countryData from './result.json';
 
 export default function InsightFlowChart(props) {
     const {origin, destination} = props;
-    
+    const countries_to_iso = require('../hooks/countries_to_iso_a2.json');
+
+    const getCountryName = (iso) => {
+        return countries_to_iso.find((s) => s["code"] === iso)?.name
+    }
+
     if(destination && !origin){}
     // get origin countries for application data
     var oriCountriesApp = countryData.filter((s) => s.type === "ASY_APP" && s.age === "TOTAL" && s.sex === "T" && s.geo === destination);
@@ -15,10 +20,7 @@ export default function InsightFlowChart(props) {
       })
     var top5AppList = [...appList].slice(0, 5);
     var options = require("../hooks/insightChart.json");
-    // var maxAppNum = Math.max(...(top5AppList.flatMap((s) => s.sum)));
-    // var applicationSum = top5AppList.reduce((a, v) => a = a + v.sum, 0)
 
-    
     // get origin countries for resettlement data
     var oriCountriesRes = [];
     var curOriCountryRes = (oriCountryName) => {
@@ -34,24 +36,23 @@ export default function InsightFlowChart(props) {
         oriCountriesRes.push(curOriCountryRes(oriName));
         console.log("newRes added: " + oriCountriesRes[oriCountriesRes.length - 1]);
     }
-    console.log("resList: " + oriCountriesRes[0] + ";" + oriCountriesRes[1] + ";" + oriCountriesRes[2] + ";" + oriCountriesRes[3] + ";" + oriCountriesRes[4] + ";" + oriCountriesRes[5] + ";" + oriCountriesRes[6]); // sorted origin country list for application data
-    // var resettlementSum = oriCountriesRes.reduce((a, v) => a = a + v, 0)
+    console.log("resList: " + oriCountriesRes[0] + ";" + oriCountriesRes[1] + ";" + oriCountriesRes[2] + ";" + oriCountriesRes[3] + ";" + oriCountriesRes[4] + ";" + oriCountriesRes[5] + ";" + oriCountriesRes[6]); // sorted
 
-    options["series"]["data"][2]["name"] = top5AppList[0].citizen
-    options["series"]["data"][3]["name"] = top5AppList[1].citizen
-    options["series"]["data"][4]["name"] = top5AppList[2].citizen
-    options["series"]["data"][5]["name"] = top5AppList[3].citizen
-    options["series"]["data"][6]["name"] = top5AppList[4].citizen
+    options["series"]["data"][2]["name"] = getCountryName(top5AppList[0].citizen)
+    options["series"]["data"][3]["name"] = getCountryName(top5AppList[1].citizen)
+    options["series"]["data"][4]["name"] = getCountryName(top5AppList[2].citizen)
+    options["series"]["data"][5]["name"] = getCountryName(top5AppList[3].citizen)
+    options["series"]["data"][6]["name"] = getCountryName(top5AppList[4].citizen)
     // origin application
-    options["series"]["links"][0]["target"] = top5AppList[0].citizen
+    options["series"]["links"][0]["target"] = getCountryName(top5AppList[0].citizen)
     options["series"]["links"][0]["value"] = top5AppList[0].sum
-    options["series"]["links"][1]["target"] = top5AppList[1].citizen
+    options["series"]["links"][1]["target"] = getCountryName(top5AppList[1].citizen)
     options["series"]["links"][1]["value"] = top5AppList[1].sum
-    options["series"]["links"][2]["target"] = top5AppList[2].citizen
+    options["series"]["links"][2]["target"] = getCountryName(top5AppList[2].citizen)
     options["series"]["links"][2]["value"] = top5AppList[2].sum
-    options["series"]["links"][3]["target"] = top5AppList[3].citizen
+    options["series"]["links"][3]["target"] = getCountryName(top5AppList[3].citizen)
     options["series"]["links"][3]["value"] = top5AppList[3].sum
-    options["series"]["links"][4]["target"] = top5AppList[4].citizen
+    options["series"]["links"][4]["target"] = getCountryName(top5AppList[4].citizen)
     options["series"]["links"][4]["value"] = top5AppList[4].sum
     // resettle application
     options["series"]["links"][5]["value"] = oriCountriesRes[0]
@@ -60,11 +61,11 @@ export default function InsightFlowChart(props) {
     options["series"]["links"][8]["value"] = oriCountriesRes[3]
     options["series"]["links"][9]["value"] = oriCountriesRes[4]
 
-    options["series"]["links"][5]["source"] = top5AppList[0].citizen
-    options["series"]["links"][6]["source"] = top5AppList[1].citizen
-    options["series"]["links"][7]["source"] = top5AppList[2].citizen
-    options["series"]["links"][8]["source"] = top5AppList[3].citizen
-    options["series"]["links"][9]["source"] = top5AppList[4].citizen
+    options["series"]["links"][5]["source"] = getCountryName(top5AppList[0].citizen)
+    options["series"]["links"][6]["source"] = getCountryName(top5AppList[1].citizen)
+    options["series"]["links"][7]["source"] = getCountryName(top5AppList[2].citizen)
+    options["series"]["links"][8]["source"] = getCountryName(top5AppList[3].citizen)
+    options["series"]["links"][9]["source"] = getCountryName(top5AppList[4].citizen)
 
     return <div id="Top7TypeBar">
         <ReactEcharts

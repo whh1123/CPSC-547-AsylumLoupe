@@ -43,18 +43,7 @@ export default function InsightBarChart(props) {
         oriCountriesRes.push(curOriCountryRes(oriName));
         console.log("newRes added: " + oriCountriesRes[oriCountriesRes.length - 1]);
     }
-    // var oriCountriesRes = countryData.filter((s) => s.type === "RES" && s.age === "TOTAL" && s.sex === "T" && s.geo === destination);
-    // console.log("oriCountriesResList: " + oriCountriesRes[0].sum + ";" + oriCountriesRes[1].sum + ";" + oriCountriesRes[2].sum  + ";"+ oriCountriesRes[3].sum + ";" + oriCountriesRes[4].sum); // sorted origin country list for application data
-
-    // var resList = oriCountriesRes.flatMap((s) => s.sum);
-    // var resList = [...oriCountriesRes].sort(function (a, b) { 
-    //     return b.sum - a.sum // ascending order
-    //   })
-    // var topFiveResList = [...resList].slice(0, 7);
-    console.log("resList: " + oriCountriesRes[0] + ";" + oriCountriesRes[1] + ";" + oriCountriesRes[2] + ";" + oriCountriesRes[3] + ";" + oriCountriesRes[4] + ";" + oriCountriesRes[5] + ";" + oriCountriesRes[6]); // sorted origin country list for application data
-    // console.log("resList num: " + resList[0].sum + ";" + resList[1].sum  + ";" + resList[2].sum + ";" + resList[3].sum + ";" + resList[4].sum);
-    // console.log("topFiveResList name: " + topFiveResList[0].citizen + ";" + topFiveResList[1].citizen + ";" + topFiveResList[2].citizen);
-    // console.log("topFiveResList num: " + topFiveResList[0].sum + ";" + topFiveResList[1].sum + ";" + topFiveResList[2].sum);
+    
     var maxValue = Math.max(...oriCountriesRes);
     var maxResNumLen = ("" + maxValue).length;
     var appMax = maxAppNum;
@@ -86,9 +75,6 @@ export default function InsightBarChart(props) {
 
 
     options["yAxis"][0]["max"] = resMax;
-    // const logData = scaleLog().domain([1, maxValue]).range([1, 10]);
-    // options["symbolSize"] = topFiveResList.flatMap((s) => logData(s.sum));
-    // options["yAxis"][0]["max"] = Math.max(...());
     const rearrangeResData = scaleLinear().domain([0, Math.max(...(oriCountriesRes))]).range([0, resMax]);
     // assign resettlement value
     options["series"][0]["data"] = oriCountriesRes.flatMap((s) => rearrangeResData(s).toFixed(2));
