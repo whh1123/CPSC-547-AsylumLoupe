@@ -54,6 +54,7 @@
 \usepackage{cite}                      % needed to automatically sort the references
 \usepackage{tabu}                      % only used for the table example
 \usepackage{booktabs}                  % only used for the table example
+\usepackage{tabularx}
 %% We encourage the use of mathptmx for consistent usage of times font
 %% throughout the proceedings. However, if you encounter conflicts
 %% with other math-related packages, you may want to disable it.
@@ -105,7 +106,7 @@
 %\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
 
 %% Abstract section.
-\abstract{write abstruct here!} 
+\abstract{In this article we present AsylumLoupe, an information visualization tool with an interactive design, which shows the evolution of asylum applications and resettlement in European countries over time since 2008. By combining the features of the origin destination map and the chropleth map, AsylumLoupe gives the user an overview of asylum-related data for European countries using color and saturation channels. By clicking, dragging, zooming in and out of our interactive map, users can select specific asylum seekers' destination countries and origin countries to customize their exploration. Using different charts, AsylumLoupe shows asylum application and placement data grouped by different attributes respectively, which allows users to compare the number of asylum applicants and granted resettlement for asylum seekers with different attributes (e.g. gender, age, country of origin) in a particular destination country, and trends over time. These information is critical for policymakers to address the social and economic impacts of a migration problem such as refugee crisis in 2015 and help them make changes faster.} 
 % end of abstract
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal
@@ -184,12 +185,12 @@ Data for this project are sourced from Eurostat. We selected the annual aggregat
 
 Our final dataset will be obtained by concatenating 2 related datasets, the dataset for asylum applicants in all EU member countries and resettlement decision in all member countries from 2008 to 2015. As of today, we worked with more than 1,000,000 items. Each item represents the status of one asylum application or resettlement with reference to different age classes, gender classes, and original citizenship. The national Ministries of Interior and related official agencies provide these data to Eurostat. Data is presented by country and for groups of countries: the European Member States and the European Free Trade Association (EFTA). The attributes we intend to use in our analysis are both categorical and ordered. Dataset is constantly updated\cite{european_commission:2021}. We selected the newest latest dataset on 13th November 2022. Specifically, the levels of categorical attributes are as shown in \autoref{tab:lev1}. The ranges for ordered attributes are listed in \autoref{tab:lev2}. One example item/data entry from the origin datasets is presented in the \autoref{fig:tab3}.
 
-\begin{table}[tb]
+\begin{table}[]
   \caption{Level of Categorical Attributes for EU Asylum Application and Resettlement Dataset - Annual Aggregated Data}
   \label{tab:lev1}
   \scriptsize
 	\centering
-  \begin{tabular}{p{0.2\linewidth}p{0.1\linewidth}p{0.2\linewidth}p{0.3\linewidth}}
+  \begin{tabularx}{\columnwidth}{XXXX}
     \toprule
     Dimensions[code] & Levels & Labels[code] & Note \\
     \midrule
@@ -199,22 +200,22 @@ Our final dataset will be obtained by concatenating 2 related datasets, the data
     Application-Type [asyl\_app] & 3 & Asylum-Applicant [ASY\_APP], First-Time-Applicant [NASY\_APP], Subsequent-Applicant [SSEQ] & [ASY\_APP] equals [NASY\_APP] plus [SSEQ], asylum application dataset only. \\
     Unit of Measure [unit] & 1 & Person [PER] & \\
     Geopolitical Entity [geo] & 34 & 33 geo political entities in EU plus European Union of 27 member states [EU27\_2020] & Geo political entities include the EU, EEA(European Economic Area), EFTA countries, exit members included.
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
-\begin{table}[tb]
+\begin{table}[]
   \caption{Range of Ordered Attributes for EU Asylum Application and Resettlement Dataset - Annual Aggregated Data}
   \label{tab:lev2}
   \scriptsize
 	\centering
-  \begin{tabular}{p{0.2\linewidth}p{0.35\linewidth}p{0.35\linewidth}}
+  \begin{tabularx}{\columnwidth}{XXX}
     \toprule
     Dimensions[code] & Range[code] & Note \\
     \midrule
     Age Class [Age] & Total [Total], Less than 14 [Y\_LT14], From 14 to 17 [Y14-17], Less than 18 [Y\_LT18], From 18 to 34 [Y18-34], From 35 to 64 [Y35-64], 65 or older [Y\_GE65], Unknown [UNK] & Age of the applicants are distributed into 8 classes, some countries didn't split the class under 18. \\
     Time [Time] & From 2008 to 2021 & Each year represents an attribute. \\
     Cell value & From 0 to 1216806 & Value of each year, represents the number of applications or resettlements. \\
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
 \begin{figure}[tb]
@@ -299,10 +300,59 @@ Besides, this vis also allows the comparison of application and resettlement dat
 
 
 \section{Implementation}
+The development of Vis was divided into two parts: the processing of the data and the implementation f the web application. Pandas library in Python are used to analyze and process the data. We first manually cleaned the asylum applicant and placement data downloaded from Eurostat to ensure that it was in the form of a csv file that could be read correctly by Pandas. With this step we divided the data of asylum applicants or resettlement in the rightmost column of the \autoref{fig:tab3} into separate columns by year, as shown in the \autoref{fig:tab4}. Using Pandas we remove the data entries with only 0 values for years 08 to 21, and we also adjust the data entries for different attributes, such as removing data for some controversial countries and regions, as well as some data that are suspected to be wrong. We then used the jq command line tool to convert the CSV file to json. although the front-end framework we were using could accept CSV input, converting to json simplified our code and eliminated potential errors in data I/O.
+
+We picked the ReactJs library as the basic framework for front-end development. Both authors have some basic knowledge of JavaScript, and ReactJs is also suitable for writing single page applications as required by our Vis project. Origin Destination Map was developed by  utilizing the react-simple-maps library, which allowed us to build SVG maps in react with d3-geo and topojson using a declarative api. All other charts are implemented with echarts-for-react library, which is a wrapper integrated in react for creating Vis with Apache E-Charts. We can borrow the rich templates in the E-Chart library and modify them to fit our use case.
+
 \section{Milestones}
+Initially we planned to devote 160 hours to this project, and we eventually managed to complete the work as scheduled. The \autoref{tab:share} will provide a detailed explanation of how we allocated our time. Two authors share the responsibility of research, development, implementation and literary write up.
+
+\begin{table*}[b]
+  \caption{Share of Work in Project with Estimated and Actual Hours}
+  \label{tab:share}
+  \scriptsize
+	\centering
+  \begin{tabular}{p{0.18\linewidth}p{0.5\linewidth}p{0.12\linewidth}p{0.12\linewidth}}
+    \toprule
+    Task & Description & Estimated Hours/Completion & Actual Hours/Completion \\
+    \midrule
+    Pitch & Create pitch slides, gather ideas, and write up pitch documents. (All) & 4/Sep. 28 & 4/Sep. 28\\
+    \hline    
+    Pre-proposal meeting & Retrospect on old pitch idea, finalize topic and create current one. & 4/Oct. 12 & 8/Oct.14 \\
+    &Gather datasets from Eurostat.&&\\
+    &Write down motivations and possible scenarios, present to Tamara.(All)&&\\
+    \hline
+    Proposal & Write project proposal.(All) & 4/Oct.21 & 4/Oct.21 \\
+    \hline
+    Implementation part 1 & Research on suitable tools and Vis Presentation. && \\
+    &Clean, abstract, transform and aggregate data. && \\
+    &Finish requirement analysis, create user scenarios and scratches. && \\
+    &Design and Implement Project baseline application. && \\
+    \hline
+    Project report update & Write project report update.(All) & 4/Nov. 15 & 4/Nov. 15\\
+    \hline
+    Peer project review & Prepare demo for project review, get feedbacks from peer and provide to peer projects.(All) & 2/Nov. 16 & 2/Nov. 16 \\ 
+    \hline
+    Implementation Part 2 & Implement Origin Destination Map. (All) && \\
+    & Implement all insights views. && \\
+    & Implement all charts and table views. && \\
+    & Final touches and refinement on implementation. && \\
+    \hline
+    Final Presentation & Prepare and rehearse presentation. (All) & 6/Dec. 14 & 6/Dec. 14\\
+    \hline
+    Final Report & Finish writing final report.(All) & 8/Dec. 16& 8/Dec. 16\\
+    \midrule
+    \textbf{Total}&&\textbf{160/Dec. 16} & \textbf{160/Dec. 16} \\
+    \bottomrule
+    
+  \end{tabular}
+\end{table*}
+
 \section{Results}
 \section{Discussion and Future Work}
 \section{Conclusions}
+
+In this article we redefine a way to present asylum seeker movement data. By combining the characteristics of the Choropleth map and the origin destination map, we show users the flow of asylum seekers and resettled persons in Europe, while using geographic areas marked with different colors and saturation helps us to compare the quantitative value. In addition to presenting the attribute of number, we also used multiple tables to regroup the data according to different attributes (gender and age groups) and present them separately together with changes over time, which helped users to customize their exploration and better explore the asylum seeker data over time. With the help of further work on linking different views, we can improve the interactivity of Vis. The user can click on, or hovering over  a country on the Map or the insight charts, the corresponding country on the other tables will be selected or highlighted. Together, we give users a more intuitive view of European asylum movement, the general public will have a better understanding of asylum seekers in their countries, and policy makers will be able to make timely changes and improve the immigration system with the help of Vis.
 
 
 %% if specified like this the section will be committed in review mode
