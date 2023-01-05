@@ -2,7 +2,7 @@ import React from "react";
 import ReactEcharts from "echarts-for-react"
 import countryData from './result.json';
 import { useState } from "react";
-import { scaleLog, scaleLinear } from "d3-scale";
+import { scaleLinear } from "d3-scale";
 
 
 

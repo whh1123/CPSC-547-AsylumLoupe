@@ -9,12 +9,12 @@ import {
   
 
 const MapChart = (props) => {
-    const {origin, destination} = props;
+    const {destination} = props;
     const countries_to_iso = require('../hooks/countries_to_iso_a2.json');
 
-    const getCountryName = (iso) => {
-        return countries_to_iso.find((s) => s["code"] === iso)?.name
-    }
+    // const getCountryName = (iso) => {
+    //     return countries_to_iso.find((s) => s["code"] === iso)?.name
+    // }
     const markers = [
         {
           markerOffset: -30,
